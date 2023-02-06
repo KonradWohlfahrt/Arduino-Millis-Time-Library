@@ -127,7 +127,7 @@ void MillisTime::setMinute(unsigned int minute)
 void MillisTime::setSecond(unsigned int second)
 {
   // set the seconds to the 0-59 format
-  minute = minute % 60;
+  second = second % 60;
   // get the current seconds
   int s = getAbsoluteSeconds();
   // calculate and set the addition for the relative hour
@@ -135,15 +135,15 @@ void MillisTime::setSecond(unsigned int second)
 }
 
 
-void MillisTime::getAdditionHour()
+int MillisTime::getAdditionHour()
 {
   return _hourAddition;
 }
-void MillisTime::getAdditionMinute()
+int MillisTime::getAdditionMinute()
 {
   return _minuteAddition;
 }
-void MillisTime::getAditionSecond()
+int MillisTime::getAdditionSecond()
 {
   return _secondAddition;
 }
@@ -156,7 +156,7 @@ void MillisTime::setAdditionMinute(int additionMinute)
 {
   _minuteAddition = additionMinute;
 }
-void MillisTime::setAditionSecond(int additionSecond)
+void MillisTime::setAdditionSecond(int additionSecond)
 {
   _secondAddition = additionSecond;
 }

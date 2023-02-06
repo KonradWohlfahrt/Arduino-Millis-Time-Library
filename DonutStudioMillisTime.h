@@ -63,18 +63,18 @@ class MillisTime
 
     
     // get the hour addition (for relative time)
-    void getAdditionHour();
+    int getAdditionHour();
     // get the minute addition (for relative time)
-    void getAdditionMinute();
+    int getAdditionMinute();
     // get the second addition (for relative time)
-    void getAditionSecond();
+    int getAdditionSecond();
 
     // set the hour addition (for relative time)
     void setAdditionHour(int additionHour);
     // set the minute addition (for relative time)
     void setAdditionMinute(int additionMinute);
     // set the second addition (for relative time)
-    void setAditionSecond(int additionSecond);
+    void setAdditionSecond(int additionSecond);
   /*
     --- PRIVATE ---
   */

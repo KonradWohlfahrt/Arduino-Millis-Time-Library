@@ -60,12 +60,12 @@ Methods
 - `void setHour(unsigned int hour);` => set the hour
 - `void setMinute(unsigned int minute);` => set the minute
 - `void setSecond(unsigned int second);` => set the second
-- `void getAdditionHour();` => get the hour addition (for relative time)
-- `void getAdditionMinute();` => get the minute addition (for relative time)
-- `void getAditionSecond();` => get the second addition (for relative time)
+- `int getAdditionHour();` => get the hour addition (for relative time)
+- `int getAdditionMinute();` => get the minute addition (for relative time)
+- `int getAdditionSecond();` => get the second addition (for relative time)
 - `void setAdditionHour(int additionHour);` => set the hour addition (for relative time)
 - `void setAdditionMinute(int additionMinute);` => set the minute addition (for relative time)
-- `void setAditionSecond(int additionSecond);`=> set the second addition (for relative time)
+- `void setAdditionSecond(int additionSecond);`=> set the second addition (for relative time)
 
 
 ***
