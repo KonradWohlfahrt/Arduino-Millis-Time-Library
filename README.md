@@ -44,6 +44,7 @@ time.setSecond(20);
 # Documentation
 CONSTRUCTOR
 - `MillisTime(int hour = 12, int minute = 0, int second = 0);` => constructor for the class with the relative time to start from
+
 Methods
 - `void refreshDuration();` => recalculate the current duration between the last day and current time
 - `void resetTime();` => resets the time to 00h:00m:00s and restarts to count
