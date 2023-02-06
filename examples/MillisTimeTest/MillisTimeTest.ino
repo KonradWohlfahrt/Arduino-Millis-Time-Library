@@ -8,7 +8,7 @@
 #include "DonutStudioMillisTime.h"
 
 // create an object of the time class and set the time to 12h:00m:00s
-MillisTime time = MillisTime(12, 0, 0); 
+MillisTime t = MillisTime(12, 0, 0); 
 
 void setup() 
 {
@@ -16,17 +16,17 @@ void setup()
   Serial.begin(9600);
 
   // set the minute to 40
-  time.setMinute(40);
+  t.setMinute(40);
   // set the second to 20
-  time.setSecond(20);
+  t.setSecond(20);
 
   // => time now: 12h:40m:20s
 }
 void loop() 
 {
-  int h = time.getAbsoluteHours();
-  int m = time.getAbsoluteMinutes();
-  int s = time.getAbsoluteSeconds();
+  int h = t.getAbsoluteHours();
+  int m = t.getAbsoluteMinutes();
+  int s = t.getAbsoluteSeconds();
 
   Serial.print("absolute time:");
   Serial.print(h);
@@ -37,9 +37,9 @@ void loop()
 
 
 
-  h = time.getHours();
-  m = time.getMinutes();
-  s = time.getSeconds();
+  h = t.getHours();
+  m = t.getMinutes();
+  s = t.getSeconds();
 
   Serial.print("relative time:");
   Serial.print(h);

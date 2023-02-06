@@ -31,12 +31,12 @@ and create an object of the MillisTime class. With that variable you can perform
 // include the libraray
 #include "DonutStudioMillisTime.h"
 // create an object of the time class and set the time to 12h:00m:00s
-MillisTime time = MillisTime(12, 0, 0); 
+MillisTime t = MillisTime(12, 0, 0); 
 
 // set the minute to 40
-time.setMinute(40);
+t.setMinute(40);
 // set the second to 20
-time.setSecond(20);
+t.setSecond(20);
 ```
 
 
