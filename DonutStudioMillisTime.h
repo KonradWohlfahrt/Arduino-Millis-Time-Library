@@ -67,6 +67,8 @@ class MillisTime
     int getAdditionMinute();
     // get the second addition (for relative time)
     int getAdditionSecond();
+    // get the relative time(in seconds) by adding the additions onto the absolute time
+    unsigned long getAdditionTime();
 
     // set the hour addition (for relative time)
     void setAdditionHour(int additionHour);

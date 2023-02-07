@@ -75,8 +75,10 @@ int MillisTime::getAbsoluteSeconds()
 
 int MillisTime::getHours()
 {
+  // get the relative time in seconds
+  unsigned long seconds = getAdditionTime();
   // return the relative hours
-  return (getAbsoluteHours() + _hourAddition) % 24;
+  return (seconds / 3600) % 24;
 }
 int MillisTime::getHours12()
 {
@@ -87,13 +89,17 @@ int MillisTime::getHours12()
 }
 int MillisTime::getMinutes()
 {
+  // get the relative time in seconds
+  unsigned long seconds = getAdditionTime();
   // return the relative minutes
-  return (getAbsoluteMinutes() + _minuteAddition) % 60;
+  return (seconds / 60) % 60;
 }
 int MillisTime::getSeconds()
 {
+  // get the relative time in seconds
+  unsigned long seconds = getAdditionTime();
   // return the relative seconds
-  return (getAbsoluteSeconds() + _secondAddition) % 60;
+  return seconds % 60;
 }
 
 void MillisTime::setHour(int hour)
@@ -106,7 +112,7 @@ void MillisTime::setHour(int hour)
   // get the current hours
   int h = getAbsoluteHours();
   // calculate and set the addition for the relative hour
-  _hourAddition = (24 - h) + hour;
+  setAdditionHour((24 - h) + hour);
 }
 void MillisTime::setMinute(int minute)
 {
@@ -117,8 +123,8 @@ void MillisTime::setMinute(int minute)
   minute = minute % 60;
   // get the current minutes
   int m = getAbsoluteMinutes();
-  // calculate and set the addition for the relative hour
-  _minuteAddition = (60 - m) + minute;
+  // calculate and set the addition for the relative minute
+  setAdditionMinute((60 - m) + minute);
 }
 void MillisTime::setSecond(int second)
 {
@@ -129,8 +135,8 @@ void MillisTime::setSecond(int second)
   second = second % 60;
   // get the current seconds
   int s = getAbsoluteSeconds();
-  // calculate and set the addition for the relative hour
-  _secondAddition = (60 - s) + second;
+  // calculate and set the addition for the relative second
+  setAdditionSecond((60 - s) + second);
 }
 
 bool MillisTime::isAM()
@@ -157,6 +163,17 @@ int MillisTime::getAdditionSecond()
 {
   // return the second addition value
   return _secondAddition;
+}
+unsigned long MillisTime::getAdditionTime()
+{
+  // recalculate the duration
+  refreshDuration();
+  // calculate the seconds of the day and add the time
+  unsigned long seconds = _duration / 1000;
+  seconds += _secondAddition;
+  seconds += _minuteAddition * 60;
+  seconds += _hourAddition * 3600;
+  return seconds;
 }
 
 void MillisTime::setAdditionHour(int additionHour)

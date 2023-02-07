@@ -64,6 +64,7 @@ Methods
 - `int getAdditionHour();` => get the hour addition (for relative time)
 - `int getAdditionMinute();` => get the minute addition (for relative time)
 - `int getAdditionSecond();` => get the second addition (for relative time)
+- `unsigned long getAdditionTime();` => get the relative time(in seconds) by adding the additions onto the absolute time
 - `void setAdditionHour(int additionHour);` => set the hour addition (for relative time)
 - `void setAdditionMinute(int additionMinute);` => set the minute addition (for relative time)
 - `void setAdditionSecond(int additionSecond);`=> set the second addition (for relative time)

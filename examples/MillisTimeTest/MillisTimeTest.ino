@@ -15,12 +15,14 @@ void setup()
   // start the serial port
   Serial.begin(9600);
 
+  // set the hour to 4
+  clkTime.setHour(4);
   // set the minute to 40
   clkTime.setMinute(40);
   // set the second to 20
   clkTime.setSecond(20);
 
-  // => time now: 12h:40m:20s
+  // => time now: 4h:40m:20s
 }
 void loop() 
 {
@@ -39,4 +41,6 @@ void loop()
   Serial.println(clkTime.getPhrasedTime());
 
   Serial.println();
+
+  delay(500);
 }
