@@ -14,6 +14,7 @@ Cheers, Donut Studio!
 - get the time in hours, minutes and seconds without having to use an rtc
 - set the time
 - get am/pm and the time in the 12 hour format
+- get phrased time strings
 
 
 ***
@@ -57,19 +58,22 @@ Methods
 - `int getSeconds();` => get the relative seconds(0-59)
 - `bool isAM();` => returns true if the relative time is AM
 - `bool isPM();` => returns true if the relative time is PM
-- `void setHour(unsigned int hour);` => set the hour
-- `void setMinute(unsigned int minute);` => set the minute
-- `void setSecond(unsigned int second);` => set the second
+- `void setHour(int hour);` => set the hour
+- `void setMinute(int minute);` => set the minute
+- `void setSecond(int second);` => set the second
 - `int getAdditionHour();` => get the hour addition (for relative time)
 - `int getAdditionMinute();` => get the minute addition (for relative time)
 - `int getAdditionSecond();` => get the second addition (for relative time)
 - `void setAdditionHour(int additionHour);` => set the hour addition (for relative time)
 - `void setAdditionMinute(int additionMinute);` => set the minute addition (for relative time)
 - `void setAdditionSecond(int additionSecond);`=> set the second addition (for relative time)
-
+- `String getPhrasedTime(bool twelveFormat = false);` => returns the current time phrased into the following format: hh:mm:ss
+- `String getPhrasedHours(bool twelveFormat = false);` => returns the current hours phrased into the following format: hh
+- `String getPhrasedMinutes();` => returns the current minutes phrased into the following format: mm
+- `String getPhrasedSeconds();` => returns the current seconds phrased into the following format: ss
 
 ***
 # Credits
 DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-Created by Donut Studio, Febuary 06, 2023.
+Created by Donut Studio, Febuary 07, 2023.
 Released into the public domain.

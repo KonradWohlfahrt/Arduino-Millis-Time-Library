@@ -1,6 +1,6 @@
 /*
   DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 06, 2023.
+  Created by Donut Studio, Febuary 07, 2023.
   Released into the public domain.
 */
 
@@ -19,7 +19,7 @@ class MillisTime
     /*
       --- CONSTRUCTOR ---
     */
-    // constructor for the class with the relative time to start from
+    // constructor for the class with the relative time to start from: default=12h:00m:00s
     MillisTime(int hour = 12, int minute = 0, int second = 0);
 
     /*
@@ -27,7 +27,7 @@ class MillisTime
     */
     // recalculate the current duration between the last day and current time
     void refreshDuration();
-    // resets the time to 00:00:00 and restarts to count
+    // resets the time to 00h:00m:00s and restarts to count
     void resetTime();
 
 
@@ -48,18 +48,17 @@ class MillisTime
     // get the relative seconds(0-59)
     int getSeconds();
 
+    // set the hour
+    void setHour(int hour);
+    // set the minute
+    void setMinute(int minute);
+    // set the second
+    void setSecond(int second);
+
     // returns true if the relative time is AM
     bool isAM();
     // returns true if the relative time is PM
     bool isPM();
-
-
-    // set the hour
-    void setHour(unsigned int hour);
-    // set the minute
-    void setMinute(unsigned int minute);
-    // set the second
-    void setSecond(unsigned int second);
 
     
     // get the hour addition (for relative time)
@@ -75,6 +74,16 @@ class MillisTime
     void setAdditionMinute(int additionMinute);
     // set the second addition (for relative time)
     void setAdditionSecond(int additionSecond);
+    
+
+    // returns the current time phrased into the following format: hh:mm:ss
+    String getPhrasedTime(bool twelveFormat = false);
+    // returns the current hours phrased into the following format: hh
+    String getPhrasedHours(bool twelveFormat = false);
+    // returns the current minutes phrased into the following format: mm
+    String getPhrasedMinutes();
+    // returns the current seconds phrased into the following format: ss
+    String getPhrasedSeconds();
   /*
     --- PRIVATE ---
   */
@@ -85,8 +94,8 @@ class MillisTime
     unsigned long _duration = 0;
     unsigned long _previousDay = 0;
 
-    int _hourAddition = 0;
-    int _minuteAddition = 0;
-    int _secondAddition = 0;
+    unsigned int _hourAddition = 0; // to save space this variable can also be a byte
+    unsigned int _minuteAddition = 0; // to save space this variable can also be a byte
+    unsigned int _secondAddition = 0; // to save space this variable can also be a byte
 };
 #endif
