@@ -1,6 +1,6 @@
 /*
   DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 08, 2023.
+  Created by Donut Studio, Febuary 10, 2023.
   Released into the public domain.
 */
 
@@ -175,7 +175,13 @@ void MillisTime::setSecond(int second)
   // calculate and set the addition for the relative second
   setAdditionSecond((60 - s) + second);
 }
-
+void MillisTime::resetMilliseconds()
+{
+  // recalculate the duration
+  refreshDuration();
+  // add the milliseconds that are left to get to 0
+  _previousDay += 1000 -(millis() % 1000);
+}
 
 /*
   --- RELATIVE ADDITION ---

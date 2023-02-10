@@ -43,6 +43,8 @@ MillisTime clkTime = MillisTime(12, 0, 0);
 clkTime.setMinute(40);
 // set the second to 20
 clkTime.setSecond(20);
+// reset the milliseconds to make sure the clock is counting from 20.0s
+clkTime.resetMilliseconds();
 
 // returns the relative hours as an int
 int h = clkTime.getHours();
@@ -79,6 +81,7 @@ SET TIME
 - `void setHour(int hour);` => set the hour
 - `void setMinute(int minute);` => set the minute
 - `void setSecond(int second);` => set the second
+- `void resetMilliseconds();` => set the milliseconds of the relative time back to 0
 
 RELATIVE ADDITION
 - `void setAdditionHour(int additionHour);` => set the hour addition (for relative time)
@@ -109,5 +112,5 @@ OTHER
 ***
 # Credits
 DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-Created by Donut Studio, Febuary 08, 2023.
+Created by Donut Studio, Febuary 10, 2023.
 Released into the public domain.

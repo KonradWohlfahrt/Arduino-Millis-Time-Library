@@ -1,6 +1,6 @@
 /*
   DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 08, 2023.
+  Created by Donut Studio, Febuary 10, 2023.
   Released into the public domain.
 */
 
@@ -21,6 +21,8 @@ void setup()
   clkTime.setMinute(59);
   // set the second to 30
   clkTime.setSecond(30);
+  // reset the milliseconds to make sure the clock is counting from 20.0s
+  clkTime.resetMilliseconds();
 
   // => time now: 23h:59m:30s
 }
