@@ -1,6 +1,6 @@
 /*
   DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 10, 2023.
+  Created by Donut Studio, Febuary 18, 2023.
   Released into the public domain.
 */
 

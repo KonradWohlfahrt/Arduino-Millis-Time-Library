@@ -1,6 +1,6 @@
 /*
   DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 10, 2023.
+  Created by Donut Studio, Febuary 18, 2023.
   Released into the public domain.
 */
 
@@ -60,18 +60,22 @@ int MillisTime::getAbsoluteSeconds()
 
 bool MillisTime::isAbsoluteTime(int hour, int minute, int second)
 {
+  // check if the absolute time is equal to the time
   return isAbsoluteHour(hour) && isAbsoluteMinute(minute) && isAbsoluteSecond(second);
 }
 bool MillisTime::isAbsoluteHour(int hour)
 {
+  // check if the absolute hour is equal to the hour
   return getAbsoluteHours() == hour;
 }
 bool MillisTime::isAbsoluteMinute(int minute)
 {
+  // check if the absolute minute is equal to the minute
   return getAbsoluteMinutes() == minute;
 }
 bool MillisTime::isAbsoluteSecond(int second)
 {
+  // check if the absolute second is equal to the second
   return getAbsoluteSeconds() == second;
 }
 
@@ -110,27 +114,33 @@ int MillisTime::getSeconds()
 
 bool MillisTime::isAM()
 {
+  // check if the relative hour is less than 13
   return getHours() < 13;
 }
 bool MillisTime::isPM()
 {
+  // check if the relative hour is greater than 12
   return getHours() > 12;
 }
 
 bool MillisTime::isTime(int hour, int minute, int second)
 {
+  // check if the relative time is equal to the time
   return isHour(hour) && isMinute(minute) && isSecond(second);
 }
 bool MillisTime::isHour(int hour)
 {
+  // check if the relative hour is equal to the hour
   return getHours() == hour;
 }
 bool MillisTime::isMinute(int minute)
 {
+  // check if the relative minute is equal to the minute 
   return getMinutes() == minute;
 }
 bool MillisTime::isSecond(int second)
 {
+  // check if the relative second is equal to the second
   return getSeconds() == second;
 }
 
@@ -180,7 +190,7 @@ void MillisTime::resetMilliseconds()
   // recalculate the duration
   refreshDuration();
   // add the milliseconds that are left to get to 0
-  _previousDay += 1000 -(millis() % 1000);
+  _previousDay += 1000 - (millis() % 1000);
 }
 
 /*
@@ -342,6 +352,8 @@ void MillisTime::refreshDuration()
 }
 void MillisTime::resetTime()
 {
+  // set the last day to the current milliseconds
   _previousDay = millis();
+  // refresh the duration
   refreshDuration();
 }
