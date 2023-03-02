@@ -1,4 +1,4 @@
-# SEVEN SEGMENT DISPLAY CONTROLLER LIBRARY README
+# MILLIS TIME LIBRARY README
 Welcome!
 This is my solution for using the millis function to create a clock.
 Keep in mind that the oscillator of the arduino is not very preciced.
