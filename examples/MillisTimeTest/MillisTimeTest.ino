@@ -26,8 +26,20 @@ void setup()
 }
 void loop() 
 {
+  int absHrs = clkTime.getAbsoluteHours();
+  int absMin = clkTime.getAbsoluteMinutes();
+  int absSec = clkTime.getAbsoluteSeconds();
+
+  String hrs = absHrs < 10 ? "0" + String(absHrs) : String(absHrs);
+  String min = absMin < 10 ? "0" + String(absMin) : String(absMin);
+  String sec = absSec < 10 ? "0" + String(absSec) : String(absSec);
+
   Serial.print("absolute time:");
-  Serial.println(clkTime.getPhrasedAbsoluteTime());
+  Serial.print(hrs);
+  Serial.print(":");
+  Serial.print(min);
+  Serial.print(":");
+  Serial.println(sec);
 
   Serial.print("relative time:");
   Serial.println(clkTime.getPhrasedTime());

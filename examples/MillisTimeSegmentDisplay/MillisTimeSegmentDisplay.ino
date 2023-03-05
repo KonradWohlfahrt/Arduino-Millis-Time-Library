@@ -42,8 +42,20 @@ void loop()
 {
   if (millis() - previous >= 500) 
   {
+    int absHrs = clkTime.getAbsoluteHours();
+    int absMin = clkTime.getAbsoluteMinutes();
+    int absSec = clkTime.getAbsoluteSeconds();
+
+    String hrs = absHrs < 10 ? "0" + String(absHrs) : String(absHrs);
+    String min = absMin < 10 ? "0" + String(absMin) : String(absMin);
+    String sec = absSec < 10 ? "0" + String(absSec) : String(absSec);
+
     Serial.print("absolute time:");
-    Serial.println(clkTime.getPhrasedAbsoluteTime());
+    Serial.print(hrs);
+    Serial.print(":");
+    Serial.print(min);
+    Serial.print(":");
+    Serial.println(sec);
 
     Serial.print("relative time:");
     Serial.println(clkTime.getPhrasedTime());
@@ -54,9 +66,9 @@ void loop()
     if (index == 0) 
       disp.clearDisplay();
     else if (index == 1)
-      disp.setString(clkTime.getPhrasedAbsoluteHours() + clkTime.getPhrasedAbsoluteMinutes());
+      disp.setString(hrs + min);
     else if (index == 2)
-      disp.setString(clkTime.getPhrasedAbsoluteSeconds());
+      disp.setString(sec);
     else if (index == 3)
       disp.setString(clkTime.getPhrasedHours() + clkTime.getPhrasedMinutes());
     else if (index == 4)

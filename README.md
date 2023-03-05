@@ -1,4 +1,4 @@
-# MILLIS TIME LIBRARY README
+# Millis Time Library README
 Welcome!
 This is my solution for using the millis function to create a clock.
 Keep in mind that the oscillator of the arduino is not very preciced.
@@ -14,7 +14,7 @@ Cheers, Donut Studio!
 - get the time in hours, minutes and seconds without having to use an rtc
 - set the time
 - get am/pm and the time in the 12 hour format
-- get phrased time strings
+- get phrased relative time strings
 
 
 ***
@@ -43,8 +43,6 @@ MillisTime clkTime = MillisTime(12, 0, 0);
 clkTime.setMinute(40);
 // set the second to 20
 clkTime.setSecond(20);
-// reset the milliseconds to make sure the clock is counting from 20.0s
-clkTime.resetMilliseconds();
 
 // returns the relative hours as an int
 int h = clkTime.getHours();
@@ -56,14 +54,9 @@ int h = clkTime.getHours();
 CONSTRUCTOR
 - `MillisTime(int hour = 12, int minute = 0, int second = 0);` => constructor for the class with the relative time to start from, default=12h:00m:00s
 
-ABSOLUTE TIME
-- `int getAbsoluteHours();` => get the absolute hours(0-23)
-- `int getAbsoluteMinutes();` => get the absolute minutes(0-59)
-- `int getAbsoluteSeconds();` => get the absolute seconds(0-59)
-- `bool isAbsoluteTime(int hour, int minute, int second);` => check if the absolute time is equal to the given time
-- `bool isAbsoluteHour(int hour);` => check if the absolute hour is equal to the given hour
-- `bool isAbsoluteMinute(int minute);` => check if the absolute minute is equal to the given minute
-- `bool isAbsoluteSecond(int second);` => check if the absolute second is equal to the given second
+MAIN
+- `void refreshDuration();` => recalculate the current duration between the last day and current time
+- `void resetTime();` => resets the time to 00h:00m:00s and restarts to count
 
 RELATIVE TIME
 - `int getHours();` => get the relative hours(0-23)
@@ -76,6 +69,11 @@ RELATIVE TIME
 - `bool isHour(int hour);` => check if the relative hour is equal to the given hour
 - `bool isMinute(int minute);` => check if the relative minute is equal to the given minute
 - `bool isSecond(int second);` => check if the relative second is equal to the given second
+
+ABSOLUTE TIME
+- `int getAbsoluteHours();` => get the absolute hours(0-23)
+- `int getAbsoluteMinutes();` => get the absolute minutes(0-59)
+- `int getAbsoluteSeconds();` => get the absolute seconds(0-59)
 
 SET TIME
 - `void setHour(int hour);` => set the hour
@@ -92,25 +90,15 @@ RELATIVE ADDITION
 - `int getAdditionSecond();` => get the second addition (for relative time)
 - `unsigned long getAdditionTime();` => get the relative time(in seconds) by adding the additions onto the absolute time
 
-PHRASED TIME ABSOLUTE
-- `String getPhrasedAbsoluteTime();` => returns the absolute time phrased into the following format: hh:mm:ss
-- `String getPhrasedAbsoluteHours();` => returns the absolute hours phrased into the following format: hh
-- `String getPhrasedAbsoluteMinutes();` => returns the absolute minutes phrased into the following format: mm
-- `String getPhrasedAbsoluteSeconds();` => returns the absolute seconds phrased into the following format: ss
-
 PHRASED TIME RELATIVE
 - `String getPhrasedTime(bool twelveFormat = false);` => returns the current time phrased into the following format: hh:mm:ss
 - `String getPhrasedHours(bool twelveFormat = false);` => returns the current hours phrased into the following format: hh
 - `String getPhrasedMinutes();` => returns the current minutes phrased into the following format: mm
 - `String getPhrasedSeconds();` => returns the current seconds phrased into the following format: ss
 
-OTHER
-- `void refreshDuration();` => recalculate the current duration between the last day and current time
-- `void resetTime();` => resets the time to 00h:00m:00s and restarts to count
-
 
 ***
 # Credits
 DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-Created by Donut Studio, Febuary 18, 2023.
+Created by Donut Studio, March 05, 2023.
 Released into the public domain.

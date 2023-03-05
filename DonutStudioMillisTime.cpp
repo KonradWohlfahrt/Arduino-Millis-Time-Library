@@ -1,6 +1,6 @@
 /*
   DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 18, 2023.
+  Created by Donut Studio, March 05, 2023.
   Released into the public domain.
 */
 
@@ -8,7 +8,7 @@
 #include "DonutStudioMillisTime.h"
 
 /*
-  --- CONSTRUCTOR ---
+  --- --- CONSTRUCTOR --- ---
 */
 
 MillisTime::MillisTime(int hour, int minute, int second)
@@ -27,57 +27,37 @@ MillisTime::MillisTime(int hour, int minute, int second)
 
 
 /*
-  --- ABSOLUTE TIME ---
+  --- --- METHODS --- ---
 */
 
-int MillisTime::getAbsoluteHours()
+/*
+  --- MAIN ---
+*/
+
+void MillisTime::refreshDuration()
 {
-  // recalculate the duration
-  refreshDuration();
-  // calculate the seconds of the day
-  unsigned long seconds = _duration / 1000;
-  // return the hours
-  return (seconds / 3600) % 24;
+  // get the current millis value
+  unsigned long currentTime = millis();
+  // calculate the duration between the current time and the previous day, prevent the overflow problem of millis
+  _duration = currentTime - _previousDay;
+
+  // check if a new day already started 1day = 24hours = 1.440minutes = 86.400seconds = 86.400.000milliseconds
+  if (_duration >= 86400000)
+  {
+    // recalculate the time elapsed from the last day
+    _duration = _duration % 86400000;
+    // set the time stamp of the last day
+    _previousDay = currentTime - _duration;
+  }
 }
-int MillisTime::getAbsoluteMinutes()
+void MillisTime::resetTime()
 {
-  // recalculate the duration
+  // set the last day to the current milliseconds
+  _previousDay = millis();
+  // refresh the duration
   refreshDuration();
-  // calculate the seconds of the day
-  unsigned long seconds = _duration / 1000;
-  // return the minutes
-  return (seconds / 60) % 60;
-}
-int MillisTime::getAbsoluteSeconds()
-{
-  // recalculate the duration
-  refreshDuration();
-  // calculate the seconds of the day
-  unsigned long seconds = _duration / 1000;
-  // return the seconds
-  return seconds % 60;
 }
 
-bool MillisTime::isAbsoluteTime(int hour, int minute, int second)
-{
-  // check if the absolute time is equal to the time
-  return isAbsoluteHour(hour) && isAbsoluteMinute(minute) && isAbsoluteSecond(second);
-}
-bool MillisTime::isAbsoluteHour(int hour)
-{
-  // check if the absolute hour is equal to the hour
-  return getAbsoluteHours() == hour;
-}
-bool MillisTime::isAbsoluteMinute(int minute)
-{
-  // check if the absolute minute is equal to the minute
-  return getAbsoluteMinutes() == minute;
-}
-bool MillisTime::isAbsoluteSecond(int second)
-{
-  // check if the absolute second is equal to the second
-  return getAbsoluteSeconds() == second;
-}
 
 /*
   --- RELATIVE TIME ---
@@ -146,7 +126,40 @@ bool MillisTime::isSecond(int second)
 
 
 /*
-  --- SET ---
+  --- ABSOLUTE TIME ---
+*/
+
+int MillisTime::getAbsoluteHours()
+{
+  // recalculate the duration
+  refreshDuration();
+  // calculate the seconds of the day
+  unsigned long seconds = _duration / 1000;
+  // return the hours
+  return (seconds / 3600) % 24;
+}
+int MillisTime::getAbsoluteMinutes()
+{
+  // recalculate the duration
+  refreshDuration();
+  // calculate the seconds of the day
+  unsigned long seconds = _duration / 1000;
+  // return the minutes
+  return (seconds / 60) % 60;
+}
+int MillisTime::getAbsoluteSeconds()
+{
+  // recalculate the duration
+  refreshDuration();
+  // calculate the seconds of the day
+  unsigned long seconds = _duration / 1000;
+  // return the seconds
+  return seconds % 60;
+}
+
+
+/*
+  --- SET TIME ---
 */
 
 void MillisTime::setHour(int hour)
@@ -190,8 +203,9 @@ void MillisTime::resetMilliseconds()
   // recalculate the duration
   refreshDuration();
   // add the milliseconds that are left to get to 0
-  _previousDay += 1000 - (millis() % 1000);
+  _previousDay += (unsigned long)1000 - (millis() % 1000);
 }
+
 
 /*
   --- RELATIVE ADDITION ---
@@ -205,6 +219,11 @@ void MillisTime::setAdditionHour(int additionHour)
   // set the addition hours (0-23)
   _hourAddition = additionHour % 24;
 }
+int MillisTime::getAdditionHour()
+{
+  // return the hour addition value
+  return _hourAddition;
+}
 void MillisTime::setAdditionMinute(int additionMinute)
 {
   // check if the addition minutes are below 0, set them to 59
@@ -212,6 +231,11 @@ void MillisTime::setAdditionMinute(int additionMinute)
     additionMinute = 59;
   // set the addition minutes (0-59)
   _minuteAddition = additionMinute % 60;
+}
+int MillisTime::getAdditionMinute()
+{
+  // return the minute addition value
+  return _minuteAddition;
 }
 void MillisTime::setAdditionSecond(int additionSecond)
 {
@@ -221,70 +245,22 @@ void MillisTime::setAdditionSecond(int additionSecond)
   // set the addition seconds (0-59)
   _secondAddition = additionSecond % 60;
 }
-
-int MillisTime::getAdditionHour()
-{
-  // return the hour addition value
-  return _hourAddition;
-}
-int MillisTime::getAdditionMinute()
-{
-  // return the minute addition value
-  return _minuteAddition;
-}
 int MillisTime::getAdditionSecond()
 {
   // return the second addition value
   return _secondAddition;
 }
+
 unsigned long MillisTime::getAdditionTime()
 {
   // recalculate the duration
   refreshDuration();
   // calculate the seconds of the day and add the time
   unsigned long seconds = _duration / 1000;
-  seconds += (long)_secondAddition;
-  seconds += (long)_minuteAddition * 60;
-  seconds += (long)_hourAddition * 3600;
+  seconds += (unsigned long)_secondAddition;
+  seconds += (unsigned long)_minuteAddition * 60;
+  seconds += (unsigned long)_hourAddition * 3600;
   return seconds;
-}
-
-
-/*
-  --- PHRASED TIME ABSOLUTE ---
-*/
-
-String MillisTime::getPhrasedAbsoluteTime()
-{
-  // get the hours
-  String h = getPhrasedAbsoluteHours();
-  // geth the minutes
-  String m = getPhrasedAbsoluteMinutes();
-  // get the seconds
-  String s = getPhrasedAbsoluteSeconds();
-  // phrase them into the hh:mm:ss format
-  return h + ":" + m + ":" + s;
-}
-String MillisTime::getPhrasedAbsoluteHours()
-{
-  // get the hours
-  int h = getAbsoluteHours();
-  // phrase and return the hours
-  return h < 10 ? "0" + String(h) : String(h);
-}
-String MillisTime::getPhrasedAbsoluteMinutes()
-{
-  // get the minutes
-  int m = getAbsoluteMinutes();
-  // phrase and return the minutes
-  return m < 10 ? "0" + String(m) : String(m);
-}
-String MillisTime::getPhrasedAbsoluteSeconds()
-{
-  // get the minutes
-  int s = getAbsoluteSeconds();
-  // phrase and return the minutes
-  return s < 10 ? "0" + String(s) : String(s);
 }
 
 
@@ -327,33 +303,4 @@ String MillisTime::getPhrasedSeconds()
   int s = getSeconds();
   // phrase and return the seconds
   return s < 10 ? "0" + String(s) : String(s);
-}
-
-
-/*
-  --- OTHER ---
-*/
-
-void MillisTime::refreshDuration()
-{
-  // get the current millis value
-  unsigned long currentTime = millis();
-  // calculate the duration between the current time and the previous day, prevent the overflow problem of millis
-  _duration = currentTime - _previousDay;
-
-  // check if a new day already started 1day = 24hours = 1.440minutes = 86.400seconds = 86.400.000milliseconds
-  if (_duration >= 86400000)
-  {
-    // recalculate the time elapsed from the last day
-    _duration = _duration % 86400000;
-    // set the time stamp of the last day
-    _previousDay = currentTime - _duration;
-  }
-}
-void MillisTime::resetTime()
-{
-  // set the last day to the current milliseconds
-  _previousDay = millis();
-  // refresh the duration
-  refreshDuration();
 }
