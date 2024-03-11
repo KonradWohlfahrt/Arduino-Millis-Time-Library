@@ -1,15 +1,15 @@
 /*
-  DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, Febuary 10, 2023.
+  DonutStudioMillisTime.h - Library to utilize the millis function as a clock
+  Created by Donut Studio, March 11, 2024.
   Released into the public domain.
 */
 
 // include the librarys
-#include "DonutStudioMillisTime.h"
+#include <DonutStudioMillisTime.h>
 
 // this library can be found here: https://github.com/Donut-Studio/Arduino-Seven-Segment-Controller
 // instruction on the usage: https://www.instructables.com/Using-a-Seven-Segment-Display-Library-for-Arduino/
-#include "DonutStudioSevenSegment.h"
+#include <DonutStudioSevenSegment.h>
 
 // define the ground pins 
 int gnd[] = { 3, 5, 6, 9 };
@@ -24,7 +24,6 @@ unsigned long previous;
 
 void setup() 
 {
-  // start the serial port
   Serial.begin(9600);
 
   disp.initialize(true);

@@ -1,33 +1,27 @@
 /*
-  DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-  Created by Donut Studio, March 05, 2023.
+  DonutStudioMillisTime.h - Library to utilize the millis function as a clock
+  Created by Donut Studio, March 11, 2024.
   Released into the public domain.
 */
 
-#ifndef DonutStudioMillisTime.h
-#define DonutStudioMillisTime.h
+#ifndef DonutStudioMillisTime_h
+#define DonutStudioMillisTime_h
 
 #include "Arduino.h"
 
 
 class MillisTime
 {
-  /*
-    --- PUBLIC ---
-  */
+  /* --- PUBLIC --- */
   public:
-    /*
-      --- CONSTRUCTOR ---
-    */
+    /* --- CONSTRUCTOR --- */
+
     // constructor for the class with the relative time to start from, default=12h:00m:00s
     MillisTime(int hour = 12, int minute = 0, int second = 0);
 
 
-    /*
-      --- METHODS ---
-    */
-
-    /*-- MAIN --*/
+    /* --- METHODS --- */
+    /* MAIN */
 
     // recalculate the current duration between the last day and current time
     void refreshDuration();
@@ -35,7 +29,7 @@ class MillisTime
     void resetTime();
 
 
-    /*-- RELATIVE TIME --*/
+    /* RELATIVE TIME */
 
     // get the relative hours(0-23)
     int getHours();
@@ -46,8 +40,6 @@ class MillisTime
     // get the relative seconds(0-59)
     int getSeconds();
 
-    // returns true if the relative time is AM
-    bool isAM();
     // returns true if the relative time is PM
     bool isPM();
     // check if the relative time is equal to the given time
@@ -60,7 +52,7 @@ class MillisTime
     bool isSecond(int second);
 
 
-    /*-- ABSOLUTE TIME --*/
+    /* ABSOLUTE TIME */
 
     // get the absolute hours(0-23)
     int getAbsoluteHours();
@@ -70,7 +62,7 @@ class MillisTime
     int getAbsoluteSeconds();
 
 
-    /*-- SET TIME --*/
+    /* SET TIME */
 
     // set the hour
     void setHour(int hour);
@@ -82,7 +74,7 @@ class MillisTime
     void resetMilliseconds();
 
 
-    /*-- RELATIVE ADDITION --*/
+    /* RELATIVE ADDITION */
 
     // set the hour addition (for relative time)
     void setAdditionHour(int additionHour);
@@ -100,7 +92,7 @@ class MillisTime
     unsigned long getAdditionTime();
 
 
-    /*-- PHRASED TIME RELATIVE --*/
+    /* PHRASED TIME RELATIVE */
 
     // returns the current time phrased into the following format: hh:mm:ss
     String getPhrasedTime(bool twelveFormat = false);
@@ -112,18 +104,14 @@ class MillisTime
     String getPhrasedSeconds();
 
 
-  /*
-    --- PRIVATE ---
-  */
+  /* --- PRIVATE --- */
   private:
-    /*
-      --- VARIABLES ---
-    */
+    /* --- VARIABLES --- */
     unsigned long _duration = 0;
     unsigned long _previousDay = 0;
 
-    int _hourAddition = 0; // to save space this variable can also be a byte
-    int _minuteAddition = 0; // to save space this variable can also be a byte
-    int _secondAddition = 0; // to save space this variable can also be a byte
+    int _hourAddition = 0; // save storage: change to byte
+    int _minuteAddition = 0; // save storage: change to byte
+    int _secondAddition = 0; // save storage: change to byte
 };
 #endif

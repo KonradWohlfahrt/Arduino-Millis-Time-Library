@@ -35,7 +35,7 @@ There are two time types:
 Sample code:
 ```cpp
 // include the libraray
-#include "DonutStudioMillisTime.h"
+#include <DonutStudioMillisTime.h>
 // create an object of the time class and set the time to 12h:00m:00s
 MillisTime clkTime = MillisTime(12, 0, 0); 
 
@@ -63,7 +63,6 @@ RELATIVE TIME
 - `int getHours12();` => get the relative hours(0-12)
 - `int getMinutes();` => get the relative minutes(0-59)
 - `int getSeconds();` => get the relative seconds(0-59)
-- `bool isAM();` => returns true if the relative time is AM
 - `bool isPM();` => returns true if the relative time is PM
 - `bool isTime(int hour, int minute, int second);` => check if the relative time is equal to the given time
 - `bool isHour(int hour);` => check if the relative hour is equal to the given hour
@@ -99,6 +98,6 @@ PHRASED TIME RELATIVE
 
 ***
 # Credits
-DonutStudioMillisTime.h - Library for using the millis-function of the arduino to create a clock
-Created by Donut Studio, March 05, 2023.
+DonutStudioMillisTime.h - Library to utilize the millis function as a clock
+Created by Donut Studio, March 11, 2024.
 Released into the public domain.
